@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      p.red-text {
+        color: red;
+      }
+
+      .yellow-container {
+        background-color: yellow;
+      }
+
+      .child-example p {
+        border-style: solid;
+        border-color: purple;
+      }
+
+      .direct-child-example > p {
+        border-style: solid;
+        border-color: #000;
+      }
+
+      .yellow-container.shadow {
+        border: 1px solid;
+        box-shadow: 5px 10px #888888;
+        margin-bottom: 1rem;
+      }
+
+      .container {
+        margin: 2rem;
+        padding: 16px;
+        background-color: purple;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="red-text">Esto tiene red-text</p>
+
+    <div class="yellow-container">Container amarillo</div>
+
+    <div class="child-example">
+      <p>Morado</p>
+      <p>Morado</p>
+      <div>
+        <p>Morado</p>
+      </div>
+    </div>
+
+    <div class="direct-child-example">
+      <p>Este tiene que tener border negro</p>
+      <p>Este también</p>
+      <div>
+        <p>Este no tiene borde</p>
+      </div>
+    </div>
+
+    <div class="yellow-container shadow">Container amarillo con sombra</div>
+
+    <a href="https://www.google.com/"
+      >Este link tiene que ser verde por el estilo de styles.css</a
+    >
+
+    <div class="container">Container con 2rem de margin y 16px de padding</div>
+  </body>
+</html>
