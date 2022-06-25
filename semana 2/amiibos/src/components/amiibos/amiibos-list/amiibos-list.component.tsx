@@ -5,7 +5,7 @@ const AmiibosList = () => {
 
   return (
     <>
-      {loadingAmiibos && "Loading..."}
+      {loadingAmiibos && "Cargando..."}
       {amiibos.map(({ id, image, name }) => (
         <div key={id}>
           <div>{name}</div>
