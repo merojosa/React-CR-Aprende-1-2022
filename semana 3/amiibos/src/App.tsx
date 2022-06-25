@@ -1,4 +1,4 @@
-import AmiibosList from "./components/amiibos/amiibos-list/amiibos-list.component";
+import AmiibosList from "./modules/amiibos/amiibos-list/amiibos-list.component";
 
 function App() {
   return <AmiibosList />;

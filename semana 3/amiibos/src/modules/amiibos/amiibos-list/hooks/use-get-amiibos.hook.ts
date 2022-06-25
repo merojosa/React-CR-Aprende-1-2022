@@ -30,7 +30,19 @@ type Amiibo = {
 
 const useGetAmiibos = () => {
   const [amiibos, setAmiibos] = React.useState([] as Amiibo[]);
+  const [amiibosInitial, setAmiibosInitial] = React.useState([] as Amiibo[]);
   const [loadingAmiibos, setLoadingAmiibos] = React.useState(true);
+
+  // ¡Mas dolor!
+  // const [counterAmiibos2, setCounterAmiibos2] = React.useState(amiibos.length);
+  // memoized
+  const counterAmiibos = React.useMemo(() => {
+    return amiibos.length;
+  }, [amiibos]);
+
+  //React.useEffect(() => {
+  //  setCounterAmiibos2(amiibos.length);
+  // }, [amiibos]);
 
   const getAmiibos = async () => {
     setLoadingAmiibos(true);
@@ -42,6 +54,7 @@ const useGetAmiibos = () => {
         name: value.name,
       }));
       setAmiibos(amiibosResponse);
+      setAmiibosInitial(amiibosResponse);
     } catch {
       setAmiibos([]);
     } finally {
@@ -49,11 +62,33 @@ const useGetAmiibos = () => {
     }
   };
 
+  const onChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const text = event.target.value.toLowerCase();
+
+      if (text) {
+        const newAmiibos = amiibosInitial.filter(({ name }) => {
+          return name.toLowerCase().includes(text);
+        });
+        setAmiibos(newAmiibos);
+        return;
+      }
+      setAmiibos(amiibosInitial);
+    },
+    [amiibosInitial]
+  );
+
   React.useEffect(() => {
     getAmiibos();
   }, []);
 
-  return { amiibos, loadingAmiibos } as const;
+  return {
+    amiibos,
+    loadingAmiibos,
+    onChange,
+    counterAmiibos,
+    // counterAmiibos2,
+  } as const;
 };
 
 export default useGetAmiibos;
